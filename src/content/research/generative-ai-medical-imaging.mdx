@@ -1,0 +1,87 @@
+---
+title: "Generative AI for Medical Imaging"
+summary: "Research on synthetic tuberculosis chest X-ray generation using diffusion and GAN models, with downstream classifier experiments, realism metrics, and privacy-oriented evaluation."
+year: "2025"
+domain: "Healthcare AI"
+publication: "University of Guelph / Dr. Sykes AI and Healthcare Lab"
+featured: true
+order: 1
+cardImage: ../../assets/images/presenting.png
+pageImage: ../../assets/images/presenting_full.jpg
+tags:
+  - Generative AI
+  - Medical Imaging
+  - Diffusion Models
+  - Evaluation
+links:
+  repo: "https://github.com/connorpink/SyntheticData_Diffusion_TB_CXR"
+---
+
+import { Image } from "astro:assets";
+import pipelineImage from "@/assets/images/tb-synth-ai-pipeline.png";
+import comparisonImage from "@/assets/images/tb-experiment-comparison.png";
+import metricsImage from "@/assets/images/tb-metrics-table.png";
+
+## Research Focus
+
+This project studies whether synthetic data generated from chest X-rays can improve tuberculosis classification workflows and support privacy-preserving alternatives when real clinical data is limited.
+
+The work compares two generative approaches:
+
+- DCGAN
+- Stable diffusion fine-tuned from RoentGen-v2 and then adapted to tuberculosis chest X-ray data
+
+## Methodology
+
+The full pipeline was designed around both generation quality and downstream utility. Rather than stopping at sample inspection, the project evaluates how synthetic data changes classifier performance under controlled training regimes.
+
+<div class="my-8 overflow-hidden rounded-[1.5rem] border border-white/8 bg-white">
+  <Image
+    src={pipelineImage}
+    alt="Methodology pipeline for synthetic tuberculosis chest X-ray generation and downstream evaluation."
+    widths={[640, 960, 1280]}
+    sizes="(max-width: 768px) 100vw, 900px"
+    class="w-full object-cover"
+  />
+</div>
+
+## Evaluation Design
+
+The repo README and figures show a stronger research story than the résumé summary alone:
+
+- Structural and diversity metrics were tracked with SSIM and LPIPS.
+- A foundation-model distance based on RAD-DINO embeddings was proposed to measure disease-structure realism.
+- DenseNet-121 was evaluated across fixed-size, augmented fixed-budget, and augmented scaled-budget regimes.
+- Train-synthetic/test-real comparisons were used to probe whether diffusion outputs could act as privacy-preserving surrogate training data.
+
+## Key Findings
+
+Diffusion consistently outperformed GAN generation in structural coherence and downstream usefulness. The most important result was not simply that diffusion looked better, but that it preserved clinically useful signal under downstream classification more reliably than GAN-based samples.
+
+<div class="my-8 overflow-hidden rounded-[1.5rem] border border-white/8 bg-white">
+  <Image
+    src={metricsImage}
+    alt="Quantitative comparison table between GAN and diffusion-generated samples."
+    widths={[400, 640, 800]}
+    sizes="(max-width: 768px) 100vw, 560px"
+    class="w-full object-cover"
+  />
+</div>
+
+<div class="my-8 overflow-hidden rounded-[1.5rem] border border-white/8 bg-white">
+  <Image
+    src={comparisonImage}
+    alt="Experiment comparison plots across synthetic-ratio settings."
+    widths={[640, 960, 1280]}
+    sizes="(max-width: 768px) 100vw, 900px"
+    class="w-full object-cover"
+  />
+</div>
+
+## Engineering Work
+
+This repo is not just a paper artifact. It includes training code, downstream experiment scripts, evaluation tooling, data outputs, and environment setup details for cluster-based experimentation. That makes it a strong portfolio research entry because the contribution is both analytical and infrastructural.
+
+## Why It Matters
+
+The project connects generative modeling, evaluation methodology, and deployment-minded engineering. It demonstrates how to frame a research problem as a reproducible system instead of a one-off notebook experiment.

@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from "astro:content";
+import EntryLayout from "@/layouts/EntryLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<EntryLayout
+  title={project.data.title}
+  kicker="Project Case Study"
+  summary={project.data.summary}
+  pageImage={project.data.pageImage}
+  actions={[
+    { label: "Project Page", href: `/projects/${project.slug}` },
+    ...(project.data.links?.repo ? [{ label: "GitHub", href: project.data.links.repo, external: true, tone: "secondary" as const }] : []),
+    ...(project.data.links?.live ? [{ label: "Live", href: project.data.links.live, external: true, tone: "secondary" as const }] : []),
+  ]}
+  meta={[
+    { label: "Year", value: project.data.year },
+    { label: "Role", value: project.data.role },
+    { label: "Status", value: project.data.status },
+    { label: "Stack", value: project.data.stack.join(", ") },
+  ]}
+>
+  <Content />
+</EntryLayout>

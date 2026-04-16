@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Space Grotesk", "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+
+  --color-ink-950: #060816;
+  --color-ink-900: #0e1222;
+  --color-ink-800: #1a1f35;
+  --color-panel: rgba(12, 16, 31, 0.8);
+  --color-panel-strong: rgba(8, 11, 24, 0.94);
+  --color-line: rgba(125, 191, 255, 0.14);
+  --color-line-strong: rgba(125, 191, 255, 0.32);
+  --color-signal: #74d3ff;
+  --color-signal-2: #ffb86b;
+  --color-glow: #89a7ff;
+  --color-warm: #ffd089;
+  --color-text: #eef2ff;
+  --color-muted: #94a3c4;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-950 text-[var(--color-text)] antialiased;
+    background-image:
+      linear-gradient(135deg, rgba(255, 184, 107, 0.08), transparent 24%),
+      radial-gradient(circle at top left, rgba(116, 211, 255, 0.16), transparent 24%),
+      radial-gradient(circle at 82% 20%, rgba(88, 108, 255, 0.16), transparent 24%),
+      linear-gradient(to bottom, #060816, #0a0f1d 26%, #070b16 58%, #060816);
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(139, 233, 253, 0.24);
+    color: white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply tracking-tight text-white;
+  }
+
+  p {
+    @apply leading-7 text-[var(--color-text)];
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .panel {
+    @apply rounded-[1.75rem] border border-[var(--color-line)] backdrop-blur-xl;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 22%),
+      linear-gradient(180deg, var(--color-panel), var(--color-panel-strong));
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.02) inset,
+      0 24px 80px rgba(0, 0, 0, 0.36);
+  }
+
+  .grid-overlay {
+    background-image:
+      linear-gradient(rgba(125, 191, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(125, 191, 255, 0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .section-kicker {
+    @apply font-mono text-xs uppercase tracking-[0.32em] text-[var(--color-signal)];
+  }
+
+  .section-title {
+    @apply text-3xl font-semibold sm:text-4xl;
+  }
+
+  .hero-name {
+    @apply font-semibold uppercase leading-none tracking-[-0.08em] text-white;
+    font-size: clamp(4.8rem, 17vw, 13rem);
+  }
+
+  .hero-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.26);
+  }
+
+  .signal-card {
+    @apply rounded-[1.5rem] border p-4;
+    border-color: rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-full border px-3 py-1 font-mono text-[0.7rem] uppercase tracking-[0.18em];
+    border-color: rgba(255, 184, 107, 0.22);
+    color: var(--color-signal-2);
+    background: rgba(255, 184, 107, 0.08);
+  }
+
+  .prose-case {
+    @apply max-w-none;
+  }
+
+  .prose-case h2 {
+    @apply mt-10 text-2xl font-semibold;
+  }
+
+  .prose-case h3 {
+    @apply mt-8 text-xl font-semibold;
+  }
+
+  .prose-case p,
+  .prose-case li {
+    color: var(--color-text);
+  }
+
+  .prose-case ul,
+  .prose-case ol {
+    @apply my-6 space-y-3 pl-5;
+  }
+}

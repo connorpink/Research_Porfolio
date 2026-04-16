@@ -1,0 +1,41 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import { getProjects } from "@/lib/content";
+
+const projects = await getProjects();
+---
+
+<MainLayout
+  title="Projects | Connor Pink"
+  description="Selected software engineering projects, internal tooling by Connor Pink."
+>
+  <section class="shell pt-10">
+    <PageHeader
+      kicker="Projects"
+      title="Selected technical builds and portfolio systems."
+      intro="Heres a few of the projects I've worked on."
+    />
+  </section>
+
+  <section class="shell pt-8">
+    <div class="grid gap-6 lg:grid-cols-2">
+      {
+        projects.map((project) => (
+          <ProjectCard
+            href={`/projects/${project.slug}`}
+            title={project.data.title}
+            summary={project.data.summary}
+            year={project.data.year}
+            role={project.data.role}
+            status={project.data.status}
+            stack={project.data.stack}
+            cardImage={project.data.cardImage}
+            links={project.data.links}
+          />
+        ))
+      }
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,42 @@
+---
+title: "Stencil-AI"
+summary: "A dual-path stencil generation system that combines Stable Diffusion and classical computer vision to create clean print-ready stencil artwork."
+year: "2025"
+role: "AI / CV Developer"
+status: "Prototype"
+stack:
+  - Python
+  - Stable Diffusion
+  - OpenCV
+  - Fine-Tuning
+  - Gradio
+featured: true
+order: 4
+cardImage: ../../assets/images/stencil-ai-card.png
+pageImage: ../../assets/images/stencil-ai-page.png
+links:
+  repo: "https://github.com/connorpink/Stencil-AI"
+---
+
+## Overview
+
+Stencil-AI explores two different ways to generate print-ready stencils:
+
+- text-to-image generation using Stable Diffusion and fine-tuned sketch-style checkpoints
+- deterministic image conversion using classical computer vision
+
+## Design
+
+The most interesting part of the repo is that it does not force a single method. It explicitly compares:
+
+- AI generation for open-ended prompt-driven output
+- CV pipelines for fast deterministic conversion of existing images
+- a hybrid workflow where AI generates and CV refines
+
+## Research / Product Angle
+
+The repo also documents the difference between standard Stable Diffusion prompt engineering and fine-tuned checkpoints trained on sketch-style data. That makes it stronger than a simple demo because it compares model behavior instead of only showcasing generated outputs.
+
+## Why It Matters
+
+Stencil-AI sits in a useful middle ground between creative tooling and technical experimentation. It demonstrates model selection, fine-tuning tradeoffs, and workflow design rather than just single-image generation.

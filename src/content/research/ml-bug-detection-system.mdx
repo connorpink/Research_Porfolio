@@ -1,0 +1,52 @@
+---
+title: "ML-Based Bug Detection System"
+summary: "An applied research project for Nevvon that modeled application freezes through session analysis, stuckness heuristics, and predictive factor discovery."
+year: "2025"
+domain: "Applied Machine Learning"
+publication: "University of Guelph / Industry Collaboration"
+featured: true
+order: 3
+cardImage: ../../assets/images/nevvon-flow.png
+pageImage: ../../assets/images/nevvon-flow.png
+tags:
+  - Bug Detection
+  - Machine Learning
+  - Data Analysis
+  - Software Quality
+---
+
+## Research Context
+
+This project was completed with industry sponsor Nevvon and focused on a concrete operational issue: users experiencing hangs or freezes while using a Flutter-based application that records interactions in Tin Can format.
+
+## Problem Framing
+
+The key move was to turn “the app freezes sometimes” into a structured diagnostic problem:
+
+- define consistent bug categories
+- identify repeatable indicators inside session-level Tin Can data
+- combine session traces with contextual information such as IP data, device type, and timing
+- build workflows for classification, diagnosis, and later prediction
+
+## Stuckness Heuristics
+
+The staged README outlined three levels of stuckness:
+
+1. A quick-fix case where the user simply pauses before resuming normal events.
+2. A support-intervention case where the next-slide button disappears and another actor intervenes.
+3. A full-reset case where the slide freezes and the lesson has to be restarted.
+
+Those cases were distinguished using gap duration, sequence irregularities, intervention patterns, and IP changes between the end user and support staff.
+
+## Implementation
+
+The research flow was:
+
+- identify suspicious sessions
+- classify the level of stuckness
+- analyze significant contributing factors such as interaction gaps, interaction patterns, device type, and time of day
+- develop a predictive model for likely hang scenarios
+
+## Outcome
+
+The result was a more structured debugging workflow with clearer defect grouping and more actionable findings for the development team. It belongs more naturally in Research than Projects because the core contribution was analytical framing and model design rather than a shipped end-user product.

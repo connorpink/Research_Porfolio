@@ -1,0 +1,38 @@
+---
+title: "Raycast Overseerr Requesterr"
+summary: "A Raycast extension for searching media through Overseerr, checking availability, and sending requests into a Radarr / Sonarr workflow."
+year: "2025"
+role: "Extension Developer"
+status: "Prototype"
+stack:
+  - TypeScript
+  - Raycast
+  - Overseerr API
+  - Radarr
+  - Sonarr
+featured: true
+order: 5
+cardImage: ../../assets/images/overseerr-card.png
+pageImage: ../../assets/images/overseerr-page.png
+links:
+  repo: "https://github.com/connorpink/raycast-overseerr-requesterr"
+---
+
+## Overview
+
+This project brings media-request workflows into Raycast so users can search for movies and shows, inspect details, check status, and submit requests without leaving the launcher.
+
+## Functionality
+
+- search movies and TV shows through Overseerr
+- inspect details and request state
+- view download and availability status
+- create requests with options surfaced from the underlying automation stack
+
+## Technical Notes
+
+The README also captures a deployment reality that matters in real use: if Overseerr is reverse-proxied, CORS may need to be explicitly enabled before the extension can talk to the API cleanly.
+
+## Why It Matters
+
+This is a strong interface project because it wraps a self-hosted media workflow into a much tighter interaction loop. The value comes from reducing context-switching and bringing a niche operational task into a polished desktop command surface.

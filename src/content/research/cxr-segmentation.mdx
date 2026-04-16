@@ -1,0 +1,65 @@
+---
+title: "CXR Segmentation and TB Imaging Pipeline"
+summary: "A chest X-ray research pipeline combining tuberculosis classification, lung segmentation, and diffusion generation, with a current focus on segmentation model comparison and efficiency tradeoffs."
+year: "2025"
+domain: "Medical Imaging"
+publication: "University of Guelph / Graduate Research"
+featured: true
+order: 2
+cardImage: ../../assets/images/cxr-segmentation-card.png
+pageImage: ../../assets/images/cxr-segmentation-page.png
+tags:
+  - Segmentation
+  - Medical Imaging
+  - MONAI
+  - PyTorch Lightning
+links:
+  repo: "https://github.com/connorpink/CXR_Segmentation"
+---
+
+import { Image } from "astro:assets";
+import metricsImage from "@/assets/images/cxr-segmentation-metrics.png";
+
+## Research Scope
+
+This repository combines three related threads of chest X-ray work:
+
+- TB classification with TorchXRayVision and PyTorch Lightning
+- lung segmentation with MONAI and PyTorch Lightning
+- diffusion-based image generation on cropped chest X-rays
+
+The current emphasis is the segmentation study.
+
+## Core Question
+
+The central comparison asks how much segmentation quality is gained from stronger global-context modeling, and what that costs in model size, training time, and inference latency.
+
+## Compared Models
+
+- U-Net
+- Attention U-Net
+- GloRe U-Net
+- TransUNet
+
+## Findings
+
+The current multi-seed study described in the README suggests:
+
+- baseline U-Net and GloRe U-Net are the strongest overall performers
+- GloRe U-Net slightly improves foreground Dice while staying in a similar latency range
+- Attention U-Net is more variable across seeds
+- TransUNet is heavier and slower in this setup without clearly beating the strongest CNN-based models on average
+
+<div class="my-8 overflow-hidden rounded-[1.5rem] border border-white/8 bg-white">
+  <Image
+    src={metricsImage}
+    alt="Segmentation metric comparison across evaluated chest X-ray segmentation models."
+    widths={[640, 960, 1280]}
+    sizes="(max-width: 768px) 100vw, 900px"
+    class="w-full object-cover"
+  />
+</div>
+
+## Why It Matters
+
+This page belongs under Research because the value is in controlled comparison, experiment infrastructure, and report-ready outputs. It is a good example of model evaluation work that treats quality and efficiency as linked decisions rather than separate concerns.

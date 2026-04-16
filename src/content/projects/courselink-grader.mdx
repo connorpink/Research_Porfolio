@@ -1,0 +1,41 @@
+---
+title: "CourseLink Grader"
+summary: "A Typer-based CLI that speeds up grade entry for CourseLink CSV exports and prepares import-ready files from grading progress."
+year: "2025"
+role: "Python Tooling Developer"
+status: "Active Tool"
+stack:
+  - Python
+  - Typer
+  - CSV Workflows
+  - CLI UX
+  - PyPI
+featured: false
+order: 2
+links:
+  repo: "https://github.com/connorpink/CourseLink_Grader"
+  live: "https://pypi.org/project/courselink-grader/"
+---
+
+## Overview
+
+CourseLink Grader is a utility for instructors or TAs who need to work with exported CourseLink CSVs, especially for physical assignments or workflows where grades are entered outside the LMS.
+
+## Workflow
+
+The tool supports two complementary modes:
+
+- a grading harness for interactively entering grades
+- an import helper that prepares a clean CSV ready for re-import into CourseLink
+
+## Strengths
+
+- works directly from exported CSV files
+- supports fuzzy selection and `fzf` integration when available
+- autosaves grading progress
+- preserves import compatibility with CourseLink formatting
+- can merge progress back onto a fresh export when needed
+
+## Value
+
+This is a good example of practical workflow tooling: reduce repetitive friction, keep the output compatible with the target system, and make recovery/resume safe enough that people actually trust the tool.

@@ -1,0 +1,41 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import SocialLinks from "@/components/SocialLinks";
+import { siteConfig } from "@/data/site";
+---
+
+<MainLayout
+  title="Contact | Connor Pink"
+  description="Contact Connor Pink directly for research, software engineering, and technical interface work."
+>
+  <section class="shell pt-10">
+    <PageHeader
+      kicker="Contact"
+      title="Direct contact only. No backend form."
+      intro="This portfolio stays static end to end. Use email or external profile links instead of a server-backed contact workflow."
+    />
+  </section>
+
+  <section class="shell pt-8">
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <a href={siteConfig.resumeViewerUrl} class="panel p-6">
+        <div class="section-kicker">Resume</div>
+        <div class="mt-4 text-lg text-white">View in Browser</div>
+      </a>
+      <a href={`mailto:${siteConfig.email}`} class="panel p-6">
+        <div class="section-kicker">Email</div>
+        <div class="mt-4 text-lg text-white">{siteConfig.email}</div>
+      </a>
+      <div class="panel p-6 md:col-span-2 xl:col-span-2">
+        <div class="section-kicker">Profiles</div>
+        <p class="mt-4 text-sm text-[var(--color-muted)]">
+          External links styled more like the old site, but integrated into the new visual system.
+        </p>
+        <div class="mt-5">
+          <SocialLinks />
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

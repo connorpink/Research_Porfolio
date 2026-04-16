@@ -1,0 +1,47 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import { siteConfig } from "@/data/site";
+---
+
+<MainLayout title="Resume Viewer | Connor Pink">
+  <section class="shell pt-10">
+    <div class="panel grid-overlay overflow-hidden px-6 py-8 sm:px-10">
+      <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div>
+          <div class="section-kicker">Resume Viewer</div>
+          <h1 class="mt-4 text-4xl font-semibold sm:text-5xl">PDF rendered with the browser’s built-in viewer.</h1>
+          <p class="mt-4 max-w-2xl text-[var(--color-muted)]">
+            If the inline viewer is unavailable in a specific browser, you can still open or download the PDF directly.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href={siteConfig.resumePdfPath}
+            target="_blank"
+            rel="noreferrer"
+            class="rounded-full border border-[rgba(255,184,107,0.24)] bg-[rgba(255,184,107,0.08)] px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-warm)] hover:bg-[rgba(255,184,107,0.14)]"
+          >
+            Open PDF
+          </a>
+          <a
+            href={siteConfig.resumePdfPath}
+            download="connor-pink-resume.pdf"
+            class="rounded-full border border-[var(--color-line-strong)] bg-white/6 px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-white hover:bg-white/10"
+          >
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell pt-8">
+    <div class="panel overflow-hidden p-2 sm:p-3">
+      <iframe
+        src={siteConfig.resumePdfPath}
+        title="Connor Pink resume PDF"
+        class="h-[78vh] w-full rounded-[1.25rem] bg-white"
+      ></iframe>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,38 @@
+---
+title: "Asset Inventory Webpage"
+summary: "An internal inventory management system for hospital IT with transaction logging, low-stock alerts, and grouped category-based stock tracking."
+year: "2023"
+role: "Web Application Developer"
+status: "Internal Tool"
+stack:
+  - PHP
+  - MySQL
+  - IT Operations
+  - Workflow Design
+featured: false
+order: 6
+cardImage: ../../assets/images/asset-management-card.png
+pageImage: ../../assets/images/asset-management-page.png
+links:
+  repo: "https://github.com/connorpink/AssetManagementWebpage"
+---
+
+## Overview
+
+Asset Inventory Webpage was built for the IT department at Peterborough Regional Health Centre Hospital to streamline operational processes and improve access to inventory-related tasks.
+
+## System Design
+
+The README provides useful implementation details:
+
+- an `inventory` table tracks items, categories, stock levels, and reorder thresholds
+- a `log` table stores transaction history so stock movement can be audited over time
+- a `sendemail` table prevents low-stock warning emails from being sent too frequently
+
+## Workflow Value
+
+The interface groups items by category and uses stock thresholds to surface attention points visually. When inventory drops below threshold, the system can change stock-state presentation and notify the relevant list by email.
+
+## Collaboration
+
+Worked on with Jax Sutton and Connor Millson.

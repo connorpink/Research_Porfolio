@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  href: string;
+  title: string;
+  summary: string;
+  year: string;
+  role: string;
+  status: string;
+  stack: string[];
+  cardImage?: ImageMetadata;
+  links?: {
+    live?: string;
+    repo?: string;
+  };
+}
+
+const { href, title, summary, year, role, status, stack, cardImage, links } = Astro.props;
+---
+
+<div class="panel grid-overlay group flex h-full flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1.5">
+  {cardImage && (
+    <div class="border-b border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] p-4">
+      <Image
+        src={cardImage}
+        alt={title}
+        widths={[320, 480, 640]}
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        class="h-44 w-full rounded-xl object-contain object-center"
+      />
+    </div>
+  )}
+  <div class="flex h-full flex-col p-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <div class="font-mono text-xs uppercase tracking-[0.24em] text-[var(--color-signal)]">{year}</div>
+        <a href={href} class="mt-3 block text-2xl font-semibold text-white hover:text-[var(--color-signal)]">{title}</a>
+      </div>
+      <div class="rounded-full border border-[var(--color-line-strong)] px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-warm)]">
+        {status}
+      </div>
+    </div>
+    <p class="mt-5 flex-1 text-sm text-[var(--color-muted)]">{summary}</p>
+    <div class="mt-6 rounded-2xl border border-white/6 bg-black/20 p-4">
+      <div class="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-[var(--color-muted)]">Role</div>
+      <div class="mt-2 text-sm text-white">{role}</div>
+    </div>
+    <div class="mt-5 flex flex-wrap gap-2">
+      {stack.map((item) => (
+        <span class="tag">{item}</span>
+      ))}
+    </div>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a
+        href={href}
+        class="rounded-full border border-[var(--color-line-strong)] px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-white hover:bg-white/5"
+      >
+        Open
+      </a>
+      {links?.repo && (
+        <a
+          href={links.repo}
+          target="_blank"
+          rel="noreferrer"
+          class="rounded-full border border-white/10 px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--color-muted)] hover:border-[var(--color-line-strong)] hover:text-white"
+        >
+          GitHub
+        </a>
+      )}
+      {links?.live && (
+        <a
+          href={links.live}
+          target="_blank"
+          rel="noreferrer"
+          class="rounded-full border border-white/10 px-4 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--color-muted)] hover:border-[var(--color-line-strong)] hover:text-white"
+        >
+          Live
+        </a>
+      )}
+    </div>
+  </div>
+</div>

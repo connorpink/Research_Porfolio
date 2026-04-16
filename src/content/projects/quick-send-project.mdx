@@ -1,0 +1,35 @@
+---
+title: "sendrecv"
+summary: "A Go CLI for repeat SSH-based file transfer between known devices, with host presets, archive logic, remote checks, and Yazi integration."
+year: "2025"
+role: "CLI / Systems Developer"
+status: "Released"
+stack:
+  - Go
+  - SSH
+  - rsync
+  - TOML
+  - CLI UX
+featured: true
+order: 1
+links:
+  repo: "https://github.com/connorpink/quick_send_project"
+---
+
+## Overview
+
+`sendrecv` is a command-line tool for recurring file transfer between known machines. Instead of rebuilding the transport stack, it relies on `ssh` and `rsync` while packaging the workflow into one focused binary.
+
+## Core Features
+
+- `send` and `recv` commands built around saved host presets
+- interactive host selection with `fzf` when available and a Go-native fallback when not
+- TOML config with per-host defaults
+- automatic choice between raw transfer and archive mode
+- Go-native archive packing and unpacking
+- optional remote auto-extract
+- doctor commands for dependency and host readiness checks
+
+## Why It Matters
+
+The interesting part of the project is not just file copy. It is workflow compression: turning repetitive SSH transfer habits into a cleaner, reusable command with enough automation to be faster without becoming opaque.

@@ -1,0 +1,72 @@
+{
+  "$ref": "#/definitions/projects",
+  "definitions": {
+    "projects": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "stack": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featured": {
+          "type": "boolean",
+          "default": false
+        },
+        "order": {
+          "type": "number",
+          "default": 999
+        },
+        "cardImage": {
+          "type": "string"
+        },
+        "pageImage": {
+          "type": "string"
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "live": {
+              "type": "string",
+              "format": "uri"
+            },
+            "repo": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "additionalProperties": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "year",
+        "role",
+        "status",
+        "stack"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

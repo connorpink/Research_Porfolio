@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import MainLayout from "@/layouts/MainLayout.astro";
+
+interface Props {
+  title: string;
+  kicker: string;
+  summary: string;
+  meta: { label: string; value: string }[];
+  pageImage?: ImageMetadata;
+  actions?: { label: string; href: string; external?: boolean; tone?: "primary" | "secondary" }[];
+}
+
+const { title, kicker, summary, meta, pageImage, actions = [] } = Astro.props;
+---
+
+<MainLayout
+  title={title}
+  description={summary}
+  image={pageImage?.src}
+  imageAlt={title}
+  imageWidth={pageImage?.width}
+  imageHeight={pageImage?.height}
+  type="article"
+>
+  <section class="shell pt-10">
+    <div class="panel grid-overlay overflow-hidden px-6 py-10 sm:px-10">
+      <div class="section-kicker">{kicker}</div>
+      <h1 class="mt-4 max-w-4xl text-4xl font-semibold sm:text-5xl">{title}</h1>
+      <p class="mt-5 max-w-3xl text-base text-[var(--color-muted)] sm:text-lg">{summary}</p>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {meta.map((item) => (
+          <div class="rounded-2xl border border-white/6 bg-black/20 p-4">
+            <div class="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-[var(--color-muted)]">
+              {item.label}
+            </div>
+            <div class="mt-2 text-sm text-white">{item.value}</div>
+          </div>
+        ))}
+      </div>
+      {actions.length > 0 && (
+        <div class="mt-6 flex flex-wrap gap-3">
+          {actions.map((action) => (
+            <a
+              href={action.href}
+              target={action.external ? "_blank" : undefined}
+              rel={action.external ? "noreferrer" : undefined}
+              class:list={[
+                "rounded-full px-5 py-3 font-mono text-xs uppercase tracking-[0.2em]",
+                action.tone === "secondary"
+                  ? "border border-white/10 text-[var(--color-muted)] hover:border-[var(--color-line-strong)] hover:text-white"
+                  : "border border-[var(--color-line-strong)] bg-white/6 text-white hover:bg-white/10",
+              ]}
+            >
+              {action.label}
+            </a>
+          ))}
+        </div>
+      )}
+      {pageImage && (
+        <div class="mt-8 overflow-hidden rounded-[1.75rem] border border-white/8 bg-black/10">
+          <Image
+            src={pageImage}
+            alt={title}
+            widths={[640, 960, 1280, 1600]}
+            sizes="(max-width: 1280px) 100vw, 1200px"
+            class="max-h-[32rem] w-full object-cover"
+          />
+        </div>
+      )}
+    </div>
+  </section>
+  <section class="shell pt-8">
+    <article class="panel prose-case px-6 py-8 sm:px-10 sm:py-10">
+      <slot />
+    </article>
+  </section>
+</MainLayout>

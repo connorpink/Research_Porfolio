@@ -1,0 +1,34 @@
+---
+title: "Manage Engine API Automation"
+summary: "A PowerShell REST automation script that escalated local tickets into regional ManageEngine tickets, synchronized metadata, handled attachments, and reported failures back into the source ticket."
+year: "2023"
+role: "Automation Developer"
+status: "Production Automation"
+stack:
+  - PowerShell
+  - REST API
+  - Service Desk Automation
+  - Systems Integration
+featured: false
+order: 7
+links:
+  repo: "https://github.com/connorpink/ManageEngineAPI"
+---
+
+## Problem
+
+Support teams were handling ticket escalation steps that could be automated more reliably at the system level.
+
+## Solution
+
+The `LocalToRegional.ps1` script interacted with the ManageEngine API to create regional tickets from local ones, then updated the original local ticket with the corresponding regional information.
+
+The README adds several important operational details:
+
+- attached files such as images, recordings, and documents were downloaded, re-encoded locally, and re-uploaded into the destination ticket
+- ticket descriptions required data cleaning because HTML email formatting and mobile-generated messages produced inconsistent markup
+- when the workflow failed, the script wrote a note back to the ticket so staff knew manual creation was required
+
+## Deployment
+
+The script was hosted on a server and triggered automatically so the workflow could run with minimal manual intervention. According to the repo README, it was used successfully over 500 times in a single month, which makes it one of the clearest examples in the portfolio of automation generating real operational savings.
