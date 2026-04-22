@@ -10,19 +10,21 @@ const research = await getResearch();
 <MainLayout
   title="Research | Connor Pink"
   description="Research notes and technical case studies on AI, healthcare imaging, debugging systems, and interface design."
+  showContactFooter={true}
 >
   <section class="shell pt-10">
     <PageHeader
       kicker="Research"
-      title="Long-form analysis organized as static case studies."
-      intro="Heres some of the Research Projects I've been apart of during my Studies."
+      title="Research notes organized as focused case studies."
+      intro="Methods, figures, and outcomes from graduate work in medical imaging, evaluation, and applied machine learning."
     />
   </section>
 
   <section class="shell pt-8">
-    <div class="grid gap-6 lg:grid-cols-2">
+    <div class="section-surface">
+      <div class="space-y-6">
       {
-        research.map((entry) => (
+        research.map((entry, index) => (
           <ResearchCard
             href={`/research/${entry.slug}`}
             title={entry.data.title}
@@ -33,9 +35,11 @@ const research = await getResearch();
             tags={entry.data.tags}
             cardImage={entry.data.cardImage}
             links={entry.data.links}
+            reverse={index % 2 === 1}
           />
         ))
       }
+      </div>
     </div>
   </section>
 </MainLayout>

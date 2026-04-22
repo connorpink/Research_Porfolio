@@ -14,12 +14,13 @@ const { kicker, title, text, href, linkLabel } = Astro.props;
   <div class="max-w-2xl">
     <div class="section-kicker">{kicker}</div>
     <h2 class="section-title mt-4">{title}</h2>
-    <p class="mt-4 text-[var(--color-muted)]">{text}</p>
+    <p class="mt-4 text-[var(--color-body)]">{text}</p>
+    <div class="section-divider max-w-xl"></div>
   </div>
   {href && linkLabel && (
     <a
       href={href}
-      class="rounded-full border border-[var(--color-line-strong)] px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-white hover:bg-white/5"
+      class="button-secondary"
     >
       {linkLabel}
     </a>

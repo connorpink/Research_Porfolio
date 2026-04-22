@@ -43,8 +43,8 @@ function SocialIcon({ icon, className }: { icon?: string; className: string }) {
 export default function SocialLinks({ compact = false }: Props) {
   const iconClass = compact ? "h-4 w-4" : "h-5 w-5";
   const linkClass = compact
-    ? "group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-3 py-2 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[var(--color-muted)] hover:border-[var(--color-line-strong)] hover:text-white"
-    : "group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/4 px-4 py-3 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-[var(--color-muted)] hover:border-[var(--color-line-strong)] hover:text-white";
+    ? "group inline-flex items-center gap-2 rounded-full border px-3 py-2 text-[0.72rem] font-medium uppercase tracking-[0.12em] text-[var(--color-muted)] [font-family:var(--font-mono)]"
+    : "group inline-flex items-center gap-3 rounded-full border px-4 py-3 text-[0.72rem] font-medium uppercase tracking-[0.12em] text-[var(--color-muted)] [font-family:var(--font-mono)]";
 
   return (
     <div className="flex flex-wrap gap-3">
@@ -55,11 +55,15 @@ export default function SocialLinks({ compact = false }: Props) {
           target={link.href.startsWith("mailto:") ? undefined : "_blank"}
           rel="noreferrer"
           className={linkClass}
+          style={{
+            borderColor: "var(--color-line)",
+            background: "rgba(255, 255, 255, 0.04)",
+          }}
         >
-          <span className="text-[var(--color-signal)] transition-colors group-hover:text-[var(--color-warm)]">
+          <span className="text-[var(--color-accent)] transition-colors group-hover:text-[var(--color-accent-strong)]">
             <SocialIcon icon={link.icon} className={iconClass} />
           </span>
-          <span>{link.label}</span>
+          <span className="group-hover:text-[var(--color-text)]">{link.label}</span>
         </a>
       ))}
     </div>

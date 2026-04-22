@@ -1,12 +1,12 @@
 export const siteConfig = {
   siteUrl: "https://connorpink.me",
   name: "Connor Pink",
-  title: "Research Portfolio",
+  title: "Software and AI Research",
   author: "Connor Pink",
   email: "connorpink@mrpink.cloud",
   phone: "(647) 515-7465",
   location: "Burlington / Toronto, ON",
-  themeColor: "#0b1020",
+  themeColor: "#f4f0e8",
   defaultSocialImage: "/visuals/social-card.jpg",
   defaultSocialImageAlt: "MR PINK mark used as Connor Pink's social sharing card.",
   defaultSocialImageWidth: 825,
@@ -16,8 +16,8 @@ export const siteConfig = {
   resumeSourceUrl:
     "https://github.com/connorpink/Connors-Resume/releases/download/general/resume.pdf",
   tagline:
-    "Software engineering, AI research, and technical systems design.",
-  bio: "I’m Connor Pink, a software developer and AI researcher currently completing an M.Sc. in Computer Science at the University of Guelph. My work spans generative AI, computer vision, explainable AI in healthcare, full-stack web systems, internal tooling, and technical interface design. This site stays fully static by design: local content, no backend dependencies, and a presentation layer built to scale cleanly.",
+    "Software engineering, AI research, and technical interface work.",
+  bio: "I’m Connor Pink, a software developer and AI researcher currently completing an M.Sc. in Computer Science at the University of Guelph. My work spans generative AI, computer vision, explainable AI in healthcare, full-stack systems, internal tooling, and front-end interfaces shaped for clarity and use.",
   socialLinks: [
     { label: "GitHub", href: "https://github.com/connorpink", icon: "github" },
     {
@@ -28,11 +28,11 @@ export const siteConfig = {
     { label: "Email", href: "mailto:connorpink@mrpink.cloud", icon: "email" },
   ],
   nav: [
-    { label: "Bio", href: "/#bio" },
-    { label: "Projects", href: "/projects" },
-    { label: "Research", href: "/research" },
-    { label: "Resume", href: "/resume" },
-    { label: "Contact", href: "/contact" },
+    { label: "About", href: "/#bio", icon: "home" },
+    { label: "Projects", href: "/projects", icon: "projects" },
+    { label: "Research", href: "/research", icon: "research" },
+    { label: "Resume", href: "/resume", icon: "resume" },
+    { label: "Contact", href: "/contact", icon: "contact" },
   ],
 };
 

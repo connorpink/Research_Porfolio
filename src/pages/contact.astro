@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import MainLayout from "@/layouts/MainLayout.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import SocialLinks from "@/components/SocialLinks";
 import { siteConfig } from "@/data/site";
+import portraitImage from "@/assets/images/ConnorPink-1.jpeg";
 ---
 
 <MainLayout
@@ -10,30 +12,47 @@ import { siteConfig } from "@/data/site";
   description="Contact Connor Pink directly for research, software engineering, and technical interface work."
 >
   <section class="shell pt-10">
-    <PageHeader
-      kicker="Contact"
-      title="Direct contact only. No backend form."
-      intro="This portfolio stays static end to end. Use email or external profile links instead of a server-backed contact workflow."
-    />
+    <div class="grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
+      <PageHeader
+        kicker="Contact"
+        title="Connor Pink"
+        intro="Email and external profiles are the best way to reach me for research, or software work."
+      />
+      <div class="image-frame panel craft-card portrait-side-card mx-auto w-full max-w-sm lg:mx-0 lg:justify-self-end">
+        <Image
+          src={portraitImage}
+          alt="Portrait of Connor Pink."
+          widths={[480, 720, 960]}
+          sizes="(max-width: 1024px) min(100vw - 2.5rem, 28rem), 28rem"
+          class="interactive-media portrait-side-image h-full w-full object-cover object-center"
+        />
+      </div>
+    </div>
   </section>
 
   <section class="shell pt-8">
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-      <a href={siteConfig.resumeViewerUrl} class="panel p-6">
-        <div class="section-kicker">Resume</div>
-        <div class="mt-4 text-lg text-white">View in Browser</div>
-      </a>
-      <a href={`mailto:${siteConfig.email}`} class="panel p-6">
-        <div class="section-kicker">Email</div>
-        <div class="mt-4 text-lg text-white">{siteConfig.email}</div>
-      </a>
-      <div class="panel p-6 md:col-span-2 xl:col-span-2">
-        <div class="section-kicker">Profiles</div>
-        <p class="mt-4 text-sm text-[var(--color-muted)]">
-          External links styled more like the old site, but integrated into the new visual system.
-        </p>
-        <div class="mt-5">
-          <SocialLinks />
+    <div class="section-surface">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <a href="/resume" class="panel craft-card p-6">
+          <div class="section-kicker">Resume</div>
+          <div class="mt-4 text-lg text-[var(--color-text)]">
+            Open Resume Page
+          </div>
+        </a>
+        <a href={`mailto:${siteConfig.email}`} class="panel craft-card p-6">
+          <div class="section-kicker">Email</div>
+          <div class="mt-4 text-lg text-[var(--color-text)]">
+            {siteConfig.email}
+          </div>
+        </a>
+        <div class="panel craft-card p-6 md:col-span-2 xl:col-span-2">
+          <div class="section-kicker">Profiles</div>
+          <!-- <p class="mt-4 text-sm text-[var(--color-body)]">
+            External profiles for code, professional history, and direct contact.
+          </p> -->
+          <div class="mt-5">
+            <SocialLinks />
+          </div>
         </div>
       </div>
     </div>

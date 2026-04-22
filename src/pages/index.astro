@@ -9,9 +9,8 @@ import { getProjects, getResearch } from "@/lib/content";
 import { siteConfig } from "@/data/site";
 import portraitImage from "@/assets/images/ConnorPink-1.jpeg";
 import presentingFullImage from "@/assets/images/presenting_full.jpg";
-import stencilImage from "@/assets/images/stencil-ai-card.png";
-import overseerrImage from "@/assets/images/overseerr-card.png";
 import cxrImage from "@/assets/images/cxr-segmentation-card.png";
+import cxrSamplesGrid from "@/assets/images/paper_samples_grid.png";
 
 const projects = (await getProjects())
   .filter((entry) => entry.data.featured)
@@ -21,327 +20,200 @@ const research = (await getResearch())
   .slice(0, 3);
 ---
 
-<MainLayout description={siteConfig.bio}>
-  <section class="shell pt-8">
-    <div
-      class="panel grid-overlay relative overflow-hidden px-6 py-8 sm:px-10 sm:py-12"
-    >
-      <div
-        class="absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.42),transparent)]"
-      >
-      </div>
-      <div
-        class="absolute -left-12 top-10 h-40 w-40 rounded-full border border-white/8"
-      >
-      </div>
-      <div
-        class="absolute right-8 top-16 h-28 w-28 rounded-full border border-[var(--color-line-strong)]"
-      >
-      </div>
-      <div class="relative grid gap-8 xl:grid-cols-[1.3fr_0.7fr]">
-        <div>
-          <div class="section-kicker">
-            Connor Pink / Software Developer / Bio
-          </div>
-          <div class="mt-6">
-            <div class="hero-name hero-outline">Connor</div>
-            <div
-              class="hero-name -mt-2 bg-[linear-gradient(90deg,#ffffff,#ffd089_65%,#74d3ff)] bg-clip-text text-transparent"
-            >
-              Pink
-            </div>
-          </div>
-          <p class="mt-6 max-w-2xl text-lg text-[var(--color-muted)]">
-            {siteConfig.bio}
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a
-              href="/projects"
-              class="rounded-full border border-[var(--color-line-strong)] bg-white/6 px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-white hover:bg-white/10"
-            >
-              View Projects
-            </a>
-            <a
-              href="/resume"
-              class="rounded-full border border-[rgba(255,184,107,0.24)] bg-[rgba(255,184,107,0.08)] px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-warm)] hover:bg-[rgba(255,184,107,0.14)]"
-            >
-              Resume
-            </a>
-          </div>
-          <div class="mt-6">
-            <SocialLinks compact />
-          </div>
-          <div id="bio" class="mt-8 grid gap-3 sm:grid-cols-3">
-            <div class="signal-card">
-              <div
-                class="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[var(--color-signal)]"
-              >
-                Location
-              </div>
-              <div class="mt-3 text-sm text-white">{siteConfig.location}</div>
-            </div>
-            <div class="signal-card">
-              <div
-                class="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[var(--color-signal)]"
-              >
-                Focus
-              </div>
-              <div class="mt-3 text-sm text-white">
-                AI research, systems, full-stack development
-              </div>
-            </div>
-            <div class="signal-card">
-              <div
-                class="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[var(--color-signal)]"
-              >
-                Status
-              </div>
-              <div class="mt-3 text-sm text-white">
-                Available for selected work
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid gap-4">
-          <div class="panel relative overflow-hidden p-4 sm:p-5">
-            <div
-              class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(116,211,255,0.18),transparent_38%)]"
-            >
-            </div>
-            <div class="relative grid gap-4">
-              <div
-                class="overflow-hidden rounded-[1.6rem] border border-white/8 bg-black/10"
-              >
-                <Image
-                  src={presentingFullImage}
-                  alt="Connor Pink presenting research."
-                  widths={[640, 960, 1280]}
-                  sizes="(max-width: 1280px) 100vw, 36vw"
-                  class="h-52 w-full object-cover object-[center_28%]"
-                />
-              </div>
-              <div
-                class="grid gap-4 sm:grid-cols-[0.82fr_1.18fr] xl:grid-cols-[0.8fr_1.2fr]"
-              >
-                <div
-                  class="overflow-hidden rounded-[1.6rem] border border-white/8 bg-[linear-gradient(160deg,rgba(255,255,255,0.1),rgba(255,255,255,0.02))] p-4"
-                >
-                  <div
-                    class="mx-auto aspect-square w-full max-w-44 overflow-hidden rounded-full border border-[var(--color-line-strong)] bg-black/20 p-2 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_18px_60px_rgba(0,0,0,0.35)]"
-                  >
-                    <Image
-                      src={portraitImage}
-                      alt="Portrait of Connor Pink."
-                      widths={[240, 320, 480]}
-                      sizes="(max-width: 640px) 176px, 192px"
-                      class="h-full w-full rounded-full object-cover object-center"
-                    />
-                  </div>
-                </div>
-                <div class="grid gap-3">
-                  <div class="signal-card">
-                    <div
-                      class="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[var(--color-signal)]"
-                    >
-                      Current Research
-                    </div>
-                    <div class="mt-3 text-sm text-white">
-                      Medical imaging, segmentation, generative models, and
-                      evaluation workflows for healthcare AI.
-                    </div>
-                  </div>
-                  <div class="signal-card">
-                    <div
-                      class="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[var(--color-signal)]"
-                    >
-                      Selected Work
-                    </div>
-                    <div class="mt-3 text-sm text-white">
-                      Full-stack applications, internal hospital IT tooling,
-                      developer utilities, and applied ML systems.
-                    </div>
-                  </div>
-                  <div class="signal-card">
-                    <div
-                      class="font-mono text-[0.65rem] uppercase tracking-[0.22em] text-[var(--color-signal)]"
-                    >
-                      Academic Context
-                    </div>
-                    <div class="mt-3 text-sm text-white">
-                      M.Sc. Computer Science at Guelph with graduate research
-                      and teaching work across AI and systems courses.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="shell pt-20">
-    <SectionIntro
-      kicker="Selected Projects"
-      title="Selected projects across tooling, interfaces, and application development."
-      text="A mix of shipped utilities, interface experiments, internal tools, and full-stack builds."
-      href="/projects"
-      linkLabel="All Projects"
-    />
-    <div class="mt-8 grid gap-6 lg:grid-cols-2">
-      {
-        projects.map((project) => (
-          <ProjectCard
-            href={`/projects/${project.slug}`}
-            title={project.data.title}
-            summary={project.data.summary}
-            year={project.data.year}
-            role={project.data.role}
-            status={project.data.status}
-            stack={project.data.stack}
-            cardImage={project.data.cardImage}
-            links={project.data.links}
-          />
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="shell pt-20">
-    <SectionIntro
-      kicker="Selected Visuals"
-      title="A cross-section of product interfaces, research figures, and applied AI work."
-      text="Representative visuals pulled from the actual projects and research entries instead of a placeholder gallery."
-    />
-    <div class="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-      <div class="panel overflow-hidden p-4 sm:p-6">
-        <div class="grid gap-4 md:grid-cols-[1.05fr_0.95fr]">
-          <div
-            class="overflow-hidden rounded-[1.5rem] border border-white/8 bg-black/10"
-          >
-            <Image
-              src={presentingFullImage}
-              alt="Connor Pink presenting research."
-              widths={[640, 960, 1280]}
-              sizes="(max-width: 768px) 100vw, 60vw"
-              class="h-full min-h-64 w-full object-cover object-[center_32%]"
-            />
-          </div>
-          <div class="grid gap-4">
-            <div
-              class="overflow-hidden rounded-[1.5rem] border border-white/8 bg-black/10"
-            >
-              <Image
-                src={cxrImage}
-                alt="Chest X-ray segmentation quality versus efficiency figure."
-                widths={[320, 480, 800]}
-                sizes="(max-width: 768px) 100vw, 30vw"
-                class="aspect-[4/3] w-full object-contain bg-white p-3"
-              />
-            </div>
-            <div class="grid gap-4 sm:grid-cols-2">
-              <div
-                class="overflow-hidden rounded-[1.5rem] border border-white/8 bg-black/10"
-              >
-                <Image
-                  src={stencilImage}
-                  alt="Stencil-AI model comparison image."
-                  widths={[320, 480, 800]}
-                  sizes="(max-width: 768px) 100vw, 20vw"
-                  class="aspect-[4/3] w-full object-contain bg-white p-3"
-                />
-              </div>
-              <div
-                class="overflow-hidden rounded-[1.5rem] border border-white/8 bg-black/10"
-              >
-                <Image
-                  src={overseerrImage}
-                  alt="Raycast Overseerr Requesterr interface screenshot."
-                  widths={[320, 480, 800]}
-                  sizes="(max-width: 768px) 100vw, 20vw"
-                  class="aspect-[4/3] w-full object-contain bg-black p-3"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="panel p-6 sm:p-8">
-        <div class="section-kicker">Visual Language</div>
-        <h2 class="mt-4 text-3xl font-semibold">
-          The portfolio works best when visuals come directly from the work
-          itself.
-        </h2>
-        <p class="mt-4 text-[var(--color-muted)]">
-          Interface screenshots, research figures, process diagrams, and
-          presentation material give the site texture without turning it into a
-          generic gallery. The strongest images here are the ones that help
-          explain the work rather than decorate around it.
+<MainLayout description={siteConfig.bio} showContactFooter={true}>
+  <section class="shell pt-8 sm:pt-12">
+    <div class="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-start">
+      <div class="panel craft-card px-6 py-8 sm:px-10 sm:py-12">
+        <div class="section-kicker">Software Developer / AI Researcher</div>
+        <h1 id="bio" class="display-title hero-identity mt-5 max-w-4xl">
+          Connor
+          <span class="block text-[var(--color-accent)]">Pink</span>
+        </h1>
+        <p class="mt-5 max-w-xl text-base sm:text-lg">
+          I&apos;m Connor Pink, currently completing an M.Sc. in Computer
+          Science at the University of Guelph. My work spans medical imaging,
+          generative AI, applied machine learning, internal tools, and front-end
+          systems shaped to make technical work clearer and more usable.
         </p>
-        <div class="mt-6 grid gap-3">
-          <a
-            href="/projects"
-            class="rounded-full border border-[var(--color-line-strong)] px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-white hover:bg-white/5"
-            >Browse Projects</a
-          >
-          <a
-            href="/research"
-            class="rounded-full border border-white/10 px-5 py-3 font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-muted)] hover:border-[var(--color-line-strong)] hover:text-white"
-            >Browse Research</a
-          >
+        <div class="section-divider max-w-2xl"></div>
+        <div class="mt-8 grid gap-4 sm:grid-cols-[1.05fr_0.95fr]">
+          <div class="meta-card">
+            <div class="measure-label">Location</div>
+            <div class="mt-2 text-sm text-[var(--color-text)]">
+              {siteConfig.location}
+            </div>
+            <div class="mt-5 measure-label">Focus</div>
+            <div class="mt-2 text-sm text-[var(--color-text)]">
+              Healthcare AI, applied ML, and technical product work
+            </div>
+          </div>
+          <div class="meta-card">
+            <div class="measure-label">Current Role</div>
+            <div class="mt-2 text-sm text-[var(--color-text)]">
+              Graduate Researcher at the University of Guelph
+            </div>
+            <div class="mt-5 measure-label">Working Across</div>
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span class="tag">Computer Vision</span>
+              <span class="tag">Generative AI</span>
+              <span class="tag">Internal Tools</span>
+              <span class="tag">Front-End Systems</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="shell pt-20">
-    <SectionIntro
-      kicker="Research Archive"
-      title="Selected research in medical imaging, evaluation, and applied machine learning."
-      text="Long-form entries that combine technical framing, methods, findings, and figures."
-      href="/research"
-      linkLabel="All Research"
-    />
-    <div class="mt-8 grid gap-6 lg:grid-cols-2">
-      {
-        research.map((entry) => (
-          <ResearchCard
-            href={`/research/${entry.slug}`}
-            title={entry.data.title}
-            summary={entry.data.summary}
-            year={entry.data.year}
-            domain={entry.data.domain}
-            publication={entry.data.publication}
-            tags={entry.data.tags}
-            cardImage={entry.data.cardImage}
-            links={entry.data.links}
-          />
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="shell pt-20">
-    <div class="panel px-6 py-8 sm:px-10">
-      <div class="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-        <div>
-          <div class="section-kicker">Contact</div>
-          <h2 class="section-title mt-4">
-            Available for research, design, and technical front-end work.
-          </h2>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/projects" class="button-primary">View Projects</a>
+          <a href="/research" class="button-secondary">Read Research</a>
         </div>
-        <div class="flex flex-wrap gap-3">
-          <a
-            href="/resume"
-            class="rounded-full border border-[rgba(255,184,107,0.22)] bg-[rgba(255,184,107,0.08)] px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-warm)] hover:bg-[rgba(255,184,107,0.14)]"
-          >
-            Resume
-          </a>
+        <div class="mt-8">
           <SocialLinks compact />
         </div>
       </div>
+
+      <div class="hero-media-grid">
+        <div class="image-frame">
+          <Image
+            src={portraitImage}
+            alt="Portrait of Connor Pink."
+            widths={[640, 960, 1280]}
+            sizes="(max-width: 1024px) 100vw, 42vw"
+            class="interactive-media h-full min-h-[24rem] w-full object-cover object-center"
+          />
+        </div>
+
+        <div class="panel craft-card px-4 py-4 sm:px-5">
+          <div class="grid gap-4 sm:grid-cols-[1.25fr_0.75fr] sm:items-end">
+            <div class="image-frame">
+              <Image
+                src={presentingFullImage}
+                alt="Connor Pink presenting research."
+                widths={[480, 720, 960]}
+                sizes="(max-width: 1024px) 100vw, 28vw"
+                class="interactive-media h-52 w-full object-cover object-[center_28%] sm:h-60"
+              />
+            </div>
+            <div class="meta-card">
+              <div class="measure-label">Recent Work</div>
+              <div class="mt-2 text-sm text-[var(--color-text)]">
+                Research presentations, experiment summaries, and
+                product-oriented technical work.
+              </div>
+              <div class="mt-4 measure-label">Availability</div>
+              <div class="mt-2 text-sm text-[var(--color-text)]">
+                Selected software, research, and interface work
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <section class="shell pt-24">
+    <div class="grid gap-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+      <div class="panel craft-card px-6 py-8 sm:px-8">
+        <div class="section-kicker">Current Research</div>
+        <h2 class="section-title mt-4">
+          Medical imaging, evaluation systems, and experiments that can be
+          communicated clearly.
+        </h2>
+        <p class="mt-5 max-w-2xl">
+          Recent work has focused on segmentation, generative modeling, and the
+          tooling needed to compare methods rigorously without losing sight of
+          usability or communication.
+        </p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <div class="meta-card">
+            <div class="measure-label">Research Areas</div>
+            <div class="mt-2 text-sm text-[var(--color-text)]">
+              Medical imaging, computer vision, explainability, generative
+              models
+            </div>
+          </div>
+          <div class="meta-card">
+            <div class="measure-label">Libraries</div>
+            <div class="mt-2 text-sm text-[var(--color-text)]">
+              Pytorch, MONAI, OpenCV, scikit-learn, Hugging Face Transformers
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/research" class="button-primary">Browse Research</a>
+          <a href="/resume" class="button-secondary">Resume</a>
+        </div>
+      </div>
+
+      <div class="image-frame">
+        <Image
+          src={cxrSamplesGrid}
+          alt="Chest X-ray segmentation figure."
+          widths={[640, 960, 1280]}
+          sizes="(max-width: 1024px) 100vw, 42vw"
+          class="h-full min-h-[22rem] w-full bg-white p-6 object-contain"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="shell pt-24">
+    <div class="section-surface section-surface--grid">
+      <SectionIntro
+        kicker="Selected Projects"
+        title="Some of my favourite projects, experiments, and technical work that I've done."
+        text="Deployed, in-progress, and open-source work across research and software development. Click on each for more information."
+        href="/projects"
+        linkLabel="All Projects"
+      />
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        {
+          projects.map((project, index) => (
+            <ProjectCard
+              href={`/projects/${project.slug}`}
+              title={project.data.title}
+              summary={project.data.summary}
+              year={project.data.year}
+              role={project.data.role}
+              status={project.data.status}
+              stack={project.data.stack}
+              cardImage={project.data.cardImage}
+              links={project.data.links}
+              variant={index === 0 ? "feature" : "standard"}
+              reverse={index === 0}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="shell pt-24">
+    <div class="section-surface">
+      <SectionIntro
+        kicker="Research Archive"
+        title="Here are some of my research projects, experiments, and writeups."
+        text="Research from my time at University of Guelph. Click on each for more information. "
+        href="/research"
+        linkLabel="All Research"
+      />
+      <div class="mt-8 space-y-6">
+        {
+          research.map((entry, index) => (
+            <ResearchCard
+              href={`/research/${entry.slug}`}
+              title={entry.data.title}
+              summary={entry.data.summary}
+              year={entry.data.year}
+              domain={entry.data.domain}
+              publication={entry.data.publication}
+              tags={entry.data.tags}
+              cardImage={entry.data.cardImage}
+              links={entry.data.links}
+              reverse={index % 2 === 1}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
 </MainLayout>
