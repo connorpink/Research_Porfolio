@@ -16,14 +16,10 @@ const { Content } = await render(project);
 
 <EntryLayout
   title={project.data.title}
-  kicker="Project Case Study"
+  section={{ label: "Projects", href: "/projects" }}
   summary={project.data.summary}
   pageImage={project.data.pageImage}
-  actions={[
-    { label: "Project Page", href: `/projects/${project.slug}` },
-    ...(project.data.links?.repo ? [{ label: "GitHub", href: project.data.links.repo, external: true, tone: "secondary" as const }] : []),
-    ...(project.data.links?.live ? [{ label: "Live", href: project.data.links.live, external: true, tone: "secondary" as const }] : []),
-  ]}
+  links={project.data.links}
   meta={[
     { label: "Year", value: project.data.year },
     { label: "Role", value: project.data.role },
