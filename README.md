@@ -1,14 +1,12 @@
 # Research Portfolio
 
-Static portfolio site built with Astro, Tailwind CSS v4, TypeScript, MDX content collections, and React only for interactive components.
+Static portfolio site built with Astro, Tailwind CSS v4, TypeScript, and MDX content collections. No client-side framework; the only script is the theme toggle.
 
 ## Stack
 
 - Astro
 - Tailwind CSS v4
 - TypeScript
-- React
-- Motion
 - MDX content collections
 
 ## Routes
