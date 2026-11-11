@@ -3,47 +3,19 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import { siteConfig } from "@/data/site";
 ---
 
-<MainLayout title="Resume Viewer | Connor Pink" showContactFooter={false}>
-  <section class="shell pt-10">
-    <div class="panel craft-card overflow-hidden px-6 py-8 sm:px-10">
-      <div
-        class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between"
-      >
-        <div>
-          <div class="section-kicker">Resume PDF</div>
-          <h1 class="display-title mt-4 text-5xl sm:text-6xl">My Resume</h1>
-          <p class="mt-4 max-w-2xl text-[var(--color-body)]">
-            The browser preview is available below, with direct open and
-            download options if you prefer the file on its own.
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-3">
-          <a
-            href={siteConfig.resumePdfPath}
-            target="_blank"
-            rel="noreferrer"
-            class="button-primary"
-          >
-            Open PDF
-          </a>
-          <a
-            href={siteConfig.resumePdfPath}
-            download="connor-pink-resume.pdf"
-            class="button-secondary"
-          >
-            Download
-          </a>
-        </div>
-      </div>
+<MainLayout title="Résumé PDF | Connor Pink">
+  <section class="shell pt-10 sm:pt-14">
+    <div class="flex flex-wrap items-baseline justify-between gap-4">
+      <p class="meta"><a class="link" href="/resume">← Résumé</a></p>
+      <p class="flex flex-wrap gap-3">
+        <a class="button-secondary" href={siteConfig.resumePdfPath} target="_blank" rel="noreferrer">Open in new tab ↗</a>
+        <a class="button-primary" href={siteConfig.resumePdfPath} download="connor-pink-resume.pdf">Download</a>
+      </p>
     </div>
-  </section>
-
-  <section class="shell pt-8">
-    <div class="panel craft-card overflow-hidden p-2 sm:p-3">
-      <iframe
-        src={siteConfig.resumePdfPath}
-        title="Connor Pink resume PDF"
-        class="h-[78vh] w-full rounded-[1.25rem] bg-white"></iframe>
-    </div>
+    <iframe
+      src={siteConfig.resumePdfPath}
+      title="Connor Pink résumé PDF"
+      class="mt-6 h-[80vh] w-full border bg-white"
+      style="border-color: var(--color-line);"></iframe>
   </section>
 </MainLayout>
