@@ -1,9 +1,9 @@
 ---
 title: "Generative AI for Medical Imaging"
-summary: "CAIAC paper exploring whether synthetic chest X-rays help because they add useful new diversity, or simply because they increase the effective training set size"
+summary: "My thesis work on synthetic chest X-rays: when they help a tuberculosis classifier, is it because they add new variety, or just because there are more images? Part of it became a short paper at Canadian AI 2026."
 year: "2026"
 domain: "Healthcare AI"
-publication: "University of Guelph / Dr. Sykes AI and Healthcare Lab"
+publication: "M.Sc. thesis, University of Guelph · paper at Canadian AI 2026"
 featured: true
 order: 1
 tags:
@@ -11,38 +11,50 @@ tags:
   - Medical Imaging
   - Diffusion Models
   - Evaluation
+cardImage: ../../assets/images/paper_samples_grid.png
+pageImage: ../../assets/images/paper_samples_grid.png
 links:
+  paper: "https://proceedings.mlr.press/v318/pink26a.html"
   repo: "https://github.com/connorpink/SyntheticData_Diffusion_TB_CXR"
 ---
 
-<div class="space-y-6">
-  <p class="max-w-3xl text-[var(--color-body)]">
-    View full PDF or find out more about me. Contact info below.
-  </p>
+import { Image } from "astro:assets";
+import pipelineImage from "@/assets/images/tb-synth-ai-pipeline.png";
+import comparisonImage from "@/assets/images/tb-experiment-comparison.png";
 
-  <div class="flex flex-wrap gap-3">
-    <a
-      href="/files/Connor_s_CanAI_paper____Round_2.pdf"
-      target="_blank"
-      rel="noreferrer"
-      class="button-primary"
-    >
-      Open PDF
-    </a>
-    <a
-      href="/files/Connor_s_CanAI_paper____Round_2.pdf"
-      download="Connor_s_CanAI_paper_Round_2.pdf"
-      class="button-secondary"
-    >
-      Download PDF
-    </a>
-  </div>
+This repository is where my thesis work on synthetic chest X-rays lives. Part of it became a short paper at the 39th Canadian Conference on Artificial Intelligence.
 
-  {/* <div class="panel craft-card overflow-hidden p-2 sm:p-3">
-    <iframe
-      src="/files/Connor_s_CanAI_paper____Round_2.pdf"
-      title="Generative AI for Medical Imaging paper PDF"
-      class="h-[78vh] w-full rounded-[1.25rem] bg-white"
-    ></iframe>
-  </div> */}
-</div>
+## The paper
+
+Connor Pink and Ed Sykes. *Disentangling dataset size from synthetic diversity in tuberculosis chest X-ray classification.* Proceedings of the 39th Canadian Conference on Artificial Intelligence, PMLR 318:954–961, 2026.
+
+<p class="flex flex-wrap gap-3">
+  <a href="https://proceedings.mlr.press/v318/pink26a.html" target="_blank" rel="noreferrer" class="button-primary">PMLR page ↗</a>
+  <a href="/files/Connor_s_CanAI_paper____Round_2.pdf" target="_blank" rel="noreferrer" class="button-secondary">PDF ↗</a>
+</p>
+
+I compared two generators on the Tuberculosis Chest X-ray Database: a 256×256 WGAN-GP and a 512×512 latent diffusion model fine-tuned from RoentGen-v2. The diffusion model wins on image-quality metrics (lower FID and Rad-Dino FID). But when the synthetic images were used to train a DenseNet-121 classifier, neither generator beat a control that just duplicated real images up to the same count.
+
+The best synthetic setting was diffusion at a low ratio (0.25 synthetic images per real one). Larger synthetic shares made things worse, especially with the WGAN-GP. Better-looking images don't guarantee a better classifier, and claims about synthetic data need a count-matched control.
+
+## Pipeline and results
+
+<figure class="fig wide">
+  <Image
+    src={pipelineImage}
+    alt="Pipeline diagram: real normal and TB X-rays, generative models, preprocessing and splits, three experiment designs with different real-to-synthetic ratios, and the evaluation metrics."
+    widths={[640, 960, 1280, 1600]}
+    sizes="(max-width: 1024px) 100vw, 56rem"
+  />
+  <figcaption><b>Fig. 1.</b> Experiment pipeline. 4,200 real X-rays (3,500 normal, 700 TB) plus synthetic images feed three designs: fixed size (E1), augmented fixed budget (E2), and augmented scaled budget (E3).</figcaption>
+</figure>
+
+<figure class="fig wide">
+  <Image
+    src={comparisonImage}
+    alt="Four line charts of test AUC, test accuracy, TB recall and TB precision against synthetic ratio for each experiment and generator."
+    widths={[640, 960, 1280, 1600]}
+    sizes="(max-width: 1024px) 100vw, 56rem"
+  />
+  <figcaption><b>Fig. 2.</b> Test AUC, accuracy, TB recall and TB precision as the synthetic share grows, for each design and generator.</figcaption>
+</figure>

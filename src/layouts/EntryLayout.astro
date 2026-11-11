@@ -4,78 +4,77 @@ import MainLayout from "@/layouts/MainLayout.astro";
 
 interface Props {
   title: string;
-  kicker: string;
+  section: { label: string; href: string };
   summary: string;
   meta: { label: string; value: string }[];
   pageImage?: ImageMetadata;
-  actions?: { label: string; href: string; external?: boolean; tone?: "primary" | "secondary" }[];
+  links?: { live?: string; repo?: string; paper?: string };
 }
 
-const { title, kicker, summary, meta, pageImage, actions = [] } = Astro.props;
+const { title, section, summary, meta, pageImage, links } = Astro.props;
 ---
 
 <MainLayout
-  title={title}
+  title={`${title} | Connor Pink`}
   description={summary}
   image={pageImage?.src}
   imageAlt={title}
   imageWidth={pageImage?.width}
   imageHeight={pageImage?.height}
   type="article"
-  showContactFooter={true}
 >
-  <section class="shell pt-10">
-    <div class="panel craft-card overflow-hidden px-6 py-10 sm:px-10">
-      <div class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-        <div>
-          <div class="section-kicker">{kicker}</div>
-          <h1 class="display-title mt-4 max-w-4xl text-5xl sm:text-6xl">{title}</h1>
-          <p class="mt-5 max-w-2xl text-base text-[var(--color-body)] sm:text-lg">{summary}</p>
-          <div class="section-divider max-w-2xl"></div>
-          <div class="mt-8 grid gap-4 sm:grid-cols-2">
-            {meta.map((item) => (
-              <div class="meta-card">
-                <div class="measure-label">
-                  {item.label}
-                </div>
-                <div class="mt-2 text-sm text-[var(--color-text)]">{item.value}</div>
-              </div>
-            ))}
-          </div>
-          {actions.length > 0 && (
-            <div class="mt-6 flex flex-wrap gap-3">
-              {actions.map((action) => (
-                <a
-                  href={action.href}
-                  target={action.external ? "_blank" : undefined}
-                  rel={action.external ? "noreferrer" : undefined}
-                  class:list={[
-                    action.tone === "secondary" ? "button-secondary" : "button-primary",
-                  ]}
-                >
-                  {action.label}
-                </a>
-              ))}
-            </div>
-          )}
-        </div>
-        {pageImage && (
-          <div class="image-frame">
-            <Image
-              src={pageImage}
-              alt={title}
-              widths={[640, 960, 1280, 1600]}
-              sizes="(max-width: 1280px) 100vw, 54vw"
-              class="max-h-[38rem] w-full object-cover"
-            />
-          </div>
+  <article class="shell pt-10 sm:pt-14">
+    <div class="margin-row">
+      <div class="margin-label">
+        <a class="link" href={section.href}>← {section.label}</a>
+      </div>
+      <header class="max-w-[40rem]">
+        <h1 class="text-[2.2rem] sm:text-[2.8rem]">{title}</h1>
+        <p class="lede mt-4">{summary}</p>
+        <dl class="meta mt-6 grid grid-cols-[6rem_1fr] gap-x-4 gap-y-1">
+          {meta.map((item) => (
+            <>
+              <dt>{item.label.toLowerCase()}</dt>
+              <dd class="text-[var(--color-body)]">{item.value}</dd>
+            </>
+          ))}
+        </dl>
+        {(links?.live || links?.repo || links?.paper) && (
+          <p class="mt-6 flex flex-wrap gap-3">
+            {links.paper && (
+              <a class="button-primary" href={links.paper} target="_blank" rel="noreferrer">Read the paper ↗</a>
+            )}
+            {links.live && (
+              <a class="button-primary" href={links.live} target="_blank" rel="noreferrer">Open live site ↗</a>
+            )}
+            {links.repo && (
+              <a class="button-secondary" href={links.repo} target="_blank" rel="noreferrer">Source on GitHub ↗</a>
+            )}
+          </p>
         )}
+      </header>
+    </div>
+
+    {pageImage && (
+      <div class="margin-row mt-12">
+        <div></div>
+        <figure class="fig">
+          <Image
+            src={pageImage}
+            alt={`Screenshot or figure from ${title}.`}
+            widths={[640, 960, 1280, 1600]}
+            sizes="(max-width: 1024px) 100vw, 52rem"
+            class="max-h-[40rem] object-contain"
+          />
+        </figure>
+      </div>
+    )}
+
+    <div class="margin-row mt-4">
+      <div></div>
+      <div class="prose-case">
+        <slot />
       </div>
     </div>
-  </section>
-  <section class="shell pt-8">
-    <article class="panel craft-card prose-case px-6 py-8 sm:px-10 sm:py-10">
-      <slot />
-    </article>
-  </section>
+  </article>
 </MainLayout>

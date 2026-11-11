@@ -1,0 +1,80 @@
+---
+import { siteConfig } from "@/data/site";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const isActive = (href: string) =>
+  currentPath === href || currentPath.startsWith(`${href}/`);
+---
+
+<header class="shell">
+  <div
+    class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b py-5"
+    style="border-color: var(--color-line);"
+  >
+    <a href="/" class="text-xl text-[var(--color-text)] no-underline hover:text-[var(--color-accent)]">
+      {siteConfig.name}
+    </a>
+    <nav class="flex flex-wrap items-baseline gap-x-5 gap-y-1 text-[0.95rem]" aria-label="Main">
+      {
+        siteConfig.nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class="nav-item"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <button type="button" class="meta theme-switch" data-theme-switch>
+        <span class="sr-only">Switch colour theme:</span>
+        <span data-theme-label>dark</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-item {
+    color: var(--color-muted);
+    text-decoration: none;
+  }
+  .nav-item:hover,
+  .nav-item[aria-current="page"] {
+    color: var(--color-text);
+  }
+  .nav-item[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 0.3em;
+  }
+  .theme-switch {
+    cursor: pointer;
+  }
+  .theme-switch:hover {
+    color: var(--color-accent);
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const button = document.querySelector("[data-theme-switch]");
+    const label = document.querySelector("[data-theme-label]");
+    if (!button || !label) return;
+    const sync = () => {
+      label.textContent =
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    };
+    sync();
+    button.addEventListener("click", () => {
+      const next =
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+      window.__setPreferredTheme?.(next);
+      sync();
+    });
+  })();
+</script>

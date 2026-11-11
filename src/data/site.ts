@@ -6,7 +6,7 @@ export const siteConfig = {
   email: "connorpink@mrpink.cloud",
   phone: "(647) 515-7465",
   location: "Burlington / Toronto, ON",
-  themeColor: "#f4f0e8",
+  themeColor: "#f6f3ec",
   defaultSocialImage: "/visuals/social-card.jpg",
   defaultSocialImageAlt: "MR PINK mark used as Connor Pink's social sharing card.",
   defaultSocialImageWidth: 825,
@@ -28,11 +28,10 @@ export const siteConfig = {
     { label: "Email", href: "mailto:connorpink@mrpink.cloud", icon: "email" },
   ],
   nav: [
-    { label: "About", href: "/#bio", icon: "home" },
-    { label: "Projects", href: "/projects", icon: "projects" },
-    { label: "Research", href: "/research", icon: "research" },
-    { label: "Resume", href: "/resume", icon: "resume" },
-    { label: "Contact", href: "/contact", icon: "contact" },
+    { label: "Research", href: "/research" },
+    { label: "Projects", href: "/projects" },
+    { label: "Resume", href: "/resume" },
+    { label: "Contact", href: "/contact" },
   ],
 };
 

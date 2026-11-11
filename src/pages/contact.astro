@@ -1,59 +1,39 @@
 ---
-import { Image } from "astro:assets";
 import MainLayout from "@/layouts/MainLayout.astro";
-import PageHeader from "@/components/PageHeader.astro";
-import SocialLinks from "@/components/SocialLinks";
 import { siteConfig } from "@/data/site";
-import portraitImage from "@/assets/images/ConnorPink-1.jpeg";
 ---
 
 <MainLayout
   title="Contact | Connor Pink"
-  description="Contact Connor Pink directly for research, software engineering, and technical interface work."
+  description="How to reach Connor Pink about research or software work."
 >
-  <section class="shell pt-10">
-    <div class="grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch">
-      <PageHeader
-        kicker="Contact"
-        title="Connor Pink"
-        intro="Email and external profiles are the best way to reach me for research, or software work."
-      />
-      <div class="image-frame panel craft-card portrait-side-card mx-auto w-full max-w-sm lg:mx-0 lg:justify-self-end">
-        <Image
-          src={portraitImage}
-          alt="Portrait of Connor Pink."
-          widths={[480, 720, 960]}
-          sizes="(max-width: 1024px) min(100vw - 2.5rem, 28rem), 28rem"
-          class="interactive-media portrait-side-image h-full w-full object-cover object-center"
-        />
-      </div>
-    </div>
-  </section>
-
-  <section class="shell pt-8">
-    <div class="section-surface">
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <a href="/resume" class="panel craft-card p-6">
-          <div class="section-kicker">Resume</div>
-          <div class="mt-4 text-lg text-[var(--color-text)]">
-            Open Resume Page
-          </div>
-        </a>
-        <a href={`mailto:${siteConfig.email}`} class="panel craft-card p-6">
-          <div class="section-kicker">Email</div>
-          <div class="mt-4 text-lg text-[var(--color-text)]">
-            {siteConfig.email}
-          </div>
-        </a>
-        <div class="panel craft-card p-6 md:col-span-2 xl:col-span-2">
-          <div class="section-kicker">Profiles</div>
-          <!-- <p class="mt-4 text-sm text-[var(--color-body)]">
-            External profiles for code, professional history, and direct contact.
-          </p> -->
-          <div class="mt-5">
-            <SocialLinks />
-          </div>
-        </div>
+  <section class="shell pt-14 sm:pt-20">
+    <div class="margin-row">
+      <div></div>
+      <div class="max-w-[38rem]">
+        <h1 class="text-[2.4rem]">Contact</h1>
+        <p class="mt-4">Email is the best way to reach me, about research or software work.</p>
+        <p class="mt-8 text-[1.6rem] sm:text-[2rem]">
+          <a class="link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        </p>
+        <dl class="meta mt-10 grid grid-cols-[6rem_1fr] gap-x-4 gap-y-2 !text-[0.8rem]">
+          {
+            siteConfig.socialLinks
+              .filter((l) => !l.href.startsWith("mailto:"))
+              .map((l) => (
+                <>
+                  <dt>{l.label.toLowerCase()}</dt>
+                  <dd>
+                    <a class="link" href={l.href} target="_blank" rel="noreferrer">
+                      {l.href.replace(/^https:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                    </a>
+                  </dd>
+                </>
+              ))
+          }
+          <dt>based in</dt>
+          <dd class="text-[var(--color-body)]">{siteConfig.location}</dd>
+        </dl>
       </div>
     </div>
   </section>

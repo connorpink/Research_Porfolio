@@ -1,7 +1,6 @@
 ---
+import { Image } from "astro:assets";
 import MainLayout from "@/layouts/MainLayout.astro";
-import PageHeader from "@/components/PageHeader.astro";
-import ResearchCard from "@/components/ResearchCard.astro";
 import { getResearch } from "@/lib/content";
 
 const research = await getResearch();
@@ -9,37 +8,65 @@ const research = await getResearch();
 
 <MainLayout
   title="Research | Connor Pink"
-  description="Research notes and technical case studies on AI, healthcare imaging, debugging systems, and interface design."
-  showContactFooter={true}
+  description="Research by Connor Pink on medical imaging, generative models, and applied machine learning."
 >
-  <section class="shell pt-10">
-    <PageHeader
-      kicker="Research"
-      title="Research notes organized as focused case studies."
-      intro="Methods, figures, and outcomes from graduate work in medical imaging, evaluation, and applied machine learning."
-    />
+  <section class="shell pt-14 sm:pt-20">
+    <div class="margin-row">
+      <div></div>
+      <div class="max-w-[38rem]">
+        <h1 class="text-[2.4rem]">Research</h1>
+        <p class="mt-4">
+          Graduate work at the University of Guelph, mostly on chest X-rays,
+          plus an applied project with Nevvon on predicting app freezes.
+        </p>
+      </div>
+    </div>
   </section>
 
-  <section class="shell pt-8">
-    <div class="section-surface">
-      <div class="space-y-6">
+  <section class="shell mt-10">
+    <div class="border-t" style="border-color: var(--color-line);">
       {
-        research.map((entry, index) => (
-          <ResearchCard
-            href={`/research/${entry.slug}`}
-            title={entry.data.title}
-            summary={entry.data.summary}
-            year={entry.data.year}
-            domain={entry.data.domain}
-            publication={entry.data.publication}
-            tags={entry.data.tags}
-            cardImage={entry.data.cardImage}
-            links={entry.data.links}
-            reverse={index % 2 === 1}
-          />
+        research.map((entry) => (
+          <article class="entry margin-row">
+            <div class="margin-label">{entry.data.year}</div>
+            <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_15rem]">
+              <div>
+                <a href={`/research/${entry.slug}`} class="entry-title no-underline">
+                  {entry.data.title}
+                </a>
+                <p class="mt-1.5 max-w-[36rem] text-[0.95rem]">{entry.data.summary}</p>
+                <p class="meta mt-2">
+                  {entry.data.publication}
+                  {entry.data.links?.paper && (
+                    <>
+                      {" · "}
+                      <a class="link" href={entry.data.links.paper} target="_blank" rel="noreferrer">paper ↗</a>
+                    </>
+                  )}
+                  {entry.data.links?.repo && (
+                    <>
+                      {" · "}
+                      <a class="link" href={entry.data.links.repo} target="_blank" rel="noreferrer">code ↗</a>
+                    </>
+                  )}
+                </p>
+              </div>
+              {entry.data.cardImage && (
+                <a href={`/research/${entry.slug}`} class="fig block" aria-hidden="true" tabindex="-1">
+                  <Image
+                    src={entry.data.cardImage}
+                    alt=""
+                    widths={[320, 640]}
+                    sizes="15rem"
+                    class="aspect-[4/3] w-full border object-contain p-2"
+                    style="background: var(--color-figure); border-color: var(--color-line);"
+                  />
+                </a>
+              )}
+            </div>
+          </article>
         ))
       }
-      </div>
     </div>
   </section>
 </MainLayout>

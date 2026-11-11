@@ -1,46 +1,60 @@
 ---
 import MainLayout from "@/layouts/MainLayout.astro";
-import PageHeader from "@/components/PageHeader.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
 import { getProjects } from "@/lib/content";
 
-const projects = await getProjects();
+// Newest first; within a year, keep the hand-set `order`.
+const projects = (await getProjects()).sort(
+  (a, b) => Number(b.data.year) - Number(a.data.year),
+);
 ---
 
 <MainLayout
   title="Projects | Connor Pink"
-  description="Selected software engineering projects, internal tooling by Connor Pink."
-  showContactFooter={true}
+  description="Software projects and internal tools built by Connor Pink."
 >
-  <section class="shell pt-10">
-    <PageHeader
-      kicker="Projects"
-      title="Selected software, interface, and tooling work."
-      intro="A compact archive of shipped builds, internal utilities, and experiments worth documenting."
-    />
+  <section class="shell pt-14 sm:pt-20">
+    <div class="margin-row">
+      <div></div>
+      <div class="max-w-[38rem]">
+        <h1 class="text-[2.4rem]">Projects</h1>
+        <p class="mt-4">
+          Things I&apos;ve built at work, at school, and for myself. Some are
+          live, some were internal tools that only ever ran inside one
+          organisation.
+        </p>
+      </div>
+    </div>
   </section>
 
-  <section class="shell pt-8">
-    <div class="section-surface section-surface--grid">
-      <div class="grid gap-6 lg:grid-cols-2">
+  <section class="shell mt-10">
+    <div class="border-t" style="border-color: var(--color-line);">
       {
-        projects.map((project, index) => (
-          <ProjectCard
-            href={`/projects/${project.slug}`}
-            title={project.data.title}
-            summary={project.data.summary}
-            year={project.data.year}
-            role={project.data.role}
-            status={project.data.status}
-            stack={project.data.stack}
-            cardImage={project.data.cardImage}
-            links={project.data.links}
-            variant={index === 0 ? "feature" : "standard"}
-            reverse={index === 0}
-          />
+        projects.map((project) => (
+          <article class="entry margin-row">
+            <div class="margin-label">{project.data.year}</div>
+            <div class="grid gap-x-8 gap-y-2 lg:grid-cols-[minmax(0,1fr)_14rem]">
+              <div>
+                <a href={`/projects/${project.slug}`} class="entry-title no-underline">
+                  {project.data.title}
+                </a>
+                <p class="mt-1 max-w-[38rem] text-[0.95rem]">{project.data.summary}</p>
+              </div>
+              <div class="meta lg:pt-1.5">
+                <div>{project.data.stack.join(", ")}</div>
+                <div class="mt-1 flex gap-3">
+                  <span>{project.data.status.toLowerCase()}</span>
+                  {project.data.links?.live && (
+                    <a class="link" href={project.data.links.live} target="_blank" rel="noreferrer">live ↗</a>
+                  )}
+                  {project.data.links?.repo && (
+                    <a class="link" href={project.data.links.repo} target="_blank" rel="noreferrer">code ↗</a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </article>
         ))
       }
-      </div>
     </div>
   </section>
 </MainLayout>

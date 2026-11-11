@@ -50,15 +50,15 @@ The current multi-seed study described in the README suggests:
 - Attention U-Net is more variable across seeds
 - TransUNet is heavier and slower in this setup without clearly beating the strongest CNN-based models on average
 
-<div class="my-8 overflow-hidden rounded-[1.5rem] border border-[rgba(90,67,48,0.12)] bg-[rgba(255,255,255,0.72)]">
+<figure class="fig wide">
   <Image
     src={metricsImage}
     alt="Segmentation metric comparison across evaluated chest X-ray segmentation models."
-    widths={[640, 960, 1280]}
-    sizes="(max-width: 768px) 100vw, 900px"
-    class="w-full object-cover"
+    widths={[640, 960, 1280, 1600]}
+    sizes="(max-width: 1024px) 100vw, 56rem"
   />
-</div>
+  <figcaption><b>Fig. 1.</b> Segmentation metrics across the four models.</figcaption>
+</figure>
 
 ## Why It Matters
 

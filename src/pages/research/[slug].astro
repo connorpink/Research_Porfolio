@@ -16,19 +16,15 @@ const { Content } = await render(entry);
 
 <EntryLayout
   title={entry.data.title}
-  kicker="Research Note"
+  section={{ label: "Research", href: "/research" }}
   summary={entry.data.summary}
   pageImage={entry.data.pageImage}
-  actions={[
-    { label: "Research Page", href: `/research/${entry.slug}` },
-    ...(entry.data.links?.repo ? [{ label: "GitHub", href: entry.data.links.repo, external: true, tone: "secondary" as const }] : []),
-    ...(entry.data.links?.live ? [{ label: "Live", href: entry.data.links.live, external: true, tone: "secondary" as const }] : []),
-  ]}
+  links={entry.data.links}
   meta={[
     { label: "Year", value: entry.data.year },
-    { label: "Domain", value: entry.data.domain },
-    { label: "Publication", value: entry.data.publication },
-    { label: "Tags", value: entry.data.tags.join(", ") },
+    { label: "Area", value: entry.data.domain },
+    { label: "Where", value: entry.data.publication },
+    { label: "Keywords", value: entry.data.tags.join(", ") },
   ]}
 >
   <Content />
