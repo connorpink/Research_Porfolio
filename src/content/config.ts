@@ -41,6 +41,7 @@ const researchCollection = defineCollection({
         .object({
           live: z.string().url().optional(),
           repo: z.string().url().optional(),
+          paper: z.string().url().optional(),
         })
         .optional(),
     }),
