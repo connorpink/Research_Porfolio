@@ -1,7 +1,7 @@
 ---
 import { siteConfig } from "@/data/site";
-import ContactFooter from "@/components/ContactFooter.astro";
-import { NavBar } from "@/components/NavBar";
+import SiteHeader from "@/components/SiteHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
 import "@/styles/global.css";
 
 interface Props {
@@ -13,7 +13,6 @@ interface Props {
   imageHeight?: number;
   type?: "website" | "article";
   noindex?: boolean;
-  showContactFooter?: boolean;
 }
 
 const {
@@ -25,7 +24,6 @@ const {
   imageHeight = siteConfig.defaultSocialImageHeight,
   type = "website",
   noindex = false,
-  showContactFooter = false,
 } = Astro.props;
 
 const site = Astro.site ?? new URL(siteConfig.siteUrl);
@@ -42,7 +40,7 @@ const currentPath = Astro.url.pathname;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -69,8 +67,8 @@ const currentPath = Astro.url.pathname;
     <script is:inline>
       (() => {
         const storageKey = "cp-theme";
-        const lightThemeColor = "#f4f0e8";
-        const darkThemeColor = "#0f1217";
+        const lightThemeColor = "#f6f3ec";
+        const darkThemeColor = "#151412";
         const media = window.matchMedia("(prefers-color-scheme: dark)");
 
         const applyTheme = (theme) => {
@@ -106,16 +104,12 @@ const currentPath = Astro.url.pathname;
       })();
     </script>
   </head>
-  <body class="relative overflow-x-hidden">
-    <div aria-hidden="true" class="site-backdrop">
-      <div class="backdrop-orb backdrop-orb--primary"></div>
-      <div class="backdrop-orb backdrop-orb--secondary"></div>
-      <div class="backdrop-orb backdrop-orb--tertiary"></div>
-    </div>
-    <NavBar currentPath={currentPath} client:load />
-    <main class="pb-32 md:pb-20">
+  <body>
+    <a href="#content" class="sr-only focus:not-sr-only">Skip to content</a>
+    <SiteHeader currentPath={currentPath} />
+    <main id="content">
       <slot />
-      {showContactFooter && <ContactFooter />}
     </main>
+    <SiteFooter />
   </body>
 </html>

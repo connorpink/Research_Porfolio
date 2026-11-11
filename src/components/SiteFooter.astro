@@ -1,0 +1,28 @@
+---
+import { siteConfig } from "@/data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="shell mt-24">
+  <div
+    class="flex flex-col gap-4 border-t py-8 sm:flex-row sm:items-baseline sm:justify-between"
+    style="border-color: var(--color-line);"
+  >
+    <div class="flex flex-wrap gap-x-5 gap-y-1">
+      <a class="link" href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+      {
+        siteConfig.socialLinks
+          .filter((l) => !l.href.startsWith("mailto:"))
+          .map((l) => (
+            <a class="link" href={l.href} target="_blank" rel="noreferrer">
+              {l.label}
+            </a>
+          ))
+      }
+    </div>
+    <p class="meta">
+      © {year} {siteConfig.name}. Set in Newsreader and IBM Plex Mono, built with Astro.
+    </p>
+  </div>
+</footer>
