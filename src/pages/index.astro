@@ -1,219 +1,151 @@
 ---
 import { Image } from "astro:assets";
 import MainLayout from "@/layouts/MainLayout.astro";
-import SectionIntro from "@/components/SectionIntro.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
-import ResearchCard from "@/components/ResearchCard.astro";
-import SocialLinks from "@/components/SocialLinks";
 import { getProjects, getResearch } from "@/lib/content";
 import { siteConfig } from "@/data/site";
 import portraitImage from "@/assets/images/ConnorPink-1.jpeg";
-import presentingFullImage from "@/assets/images/presenting_full.jpg";
-import cxrImage from "@/assets/images/cxr-segmentation-card.png";
-import cxrSamplesGrid from "@/assets/images/paper_samples_grid.png";
+import presentingImage from "@/assets/images/presenting_full.jpg";
+import samplesGrid from "@/assets/images/paper_samples_grid.png";
 
-const projects = (await getProjects())
-  .filter((entry) => entry.data.featured)
-  .slice(0, 4);
-const research = (await getResearch())
-  .filter((entry) => entry.data.featured)
-  .slice(0, 3);
+const projects = (await getProjects()).filter((p) => p.data.featured).slice(0, 4);
+const research = (await getResearch()).filter((r) => r.data.featured);
 ---
 
-<MainLayout description={siteConfig.bio} showContactFooter={true}>
-  <section class="shell pt-8 sm:pt-12">
-    <div class="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-start">
-      <div class="panel craft-card px-6 py-8 sm:px-10 sm:py-12">
-        <div class="section-kicker">Software Developer / AI Researcher</div>
-        <h1 id="bio" class="display-title hero-identity mt-5 max-w-4xl">
-          Connor
-          <span class="block text-[var(--color-accent)]">Pink</span>
-        </h1>
-        <p class="mt-5 max-w-xl text-base sm:text-lg">
-          I&apos;m Connor Pink, currently completing an M.Sc. in Computer
-          Science at the University of Guelph. My work spans medical imaging,
-          generative AI, applied machine learning, internal tools, and front-end
-          systems shaped to make technical work clearer and more usable.
+<MainLayout description={siteConfig.bio}>
+  <section class="shell pt-14 sm:pt-20">
+    <div class="grid items-start gap-10 md:grid-cols-[minmax(0,1fr)_11rem]">
+      <div class="max-w-[38rem]">
+        <h1 id="bio" class="text-[2.6rem] sm:text-[3.4rem]">Connor Pink</h1>
+        <p class="lede mt-6">
+          I&apos;m doing an M.Sc. in Computer Science at the University of
+          Guelph, in Dr.&nbsp;Sykes&apos; AI and Healthcare Lab. Most of my
+          research is on chest X-rays: segmenting lungs, generating synthetic
+          scans, and testing whether those synthetic scans actually help a
+          tuberculosis classifier.
         </p>
-        <div class="section-divider max-w-2xl"></div>
-        <div class="mt-8 grid gap-4 sm:grid-cols-[1.05fr_0.95fr]">
-          <div class="meta-card">
-            <div class="measure-label">Location</div>
-            <div class="mt-2 text-sm text-[var(--color-text)]">
-              {siteConfig.location}
-            </div>
-            <div class="mt-5 measure-label">Focus</div>
-            <div class="mt-2 text-sm text-[var(--color-text)]">
-              Healthcare AI, applied ML, and technical product work
-            </div>
-          </div>
-          <div class="meta-card">
-            <div class="measure-label">Current Role</div>
-            <div class="mt-2 text-sm text-[var(--color-text)]">
-              Graduate Researcher at the University of Guelph
-            </div>
-            <div class="mt-5 measure-label">Working Across</div>
-            <div class="mt-2 flex flex-wrap gap-2">
-              <span class="tag">Computer Vision</span>
-              <span class="tag">Generative AI</span>
-              <span class="tag">Internal Tools</span>
-              <span class="tag">Front-End Systems</span>
-            </div>
-          </div>
-        </div>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/projects" class="button-primary">View Projects</a>
-          <a href="/research" class="button-secondary">Read Research</a>
-        </div>
-        <div class="mt-8">
-          <SocialLinks compact />
-        </div>
-      </div>
-
-      <div class="hero-media-grid">
-        <div class="image-frame">
-          <Image
-            src={portraitImage}
-            alt="Portrait of Connor Pink."
-            widths={[640, 960, 1280]}
-            sizes="(max-width: 1024px) 100vw, 42vw"
-            class="interactive-media h-full min-h-[24rem] w-full object-cover object-center"
-          />
-        </div>
-
-        <div class="panel craft-card px-4 py-4 sm:px-5">
-          <div class="grid gap-4 sm:grid-cols-[1.25fr_0.75fr] sm:items-end">
-            <div class="image-frame">
-              <Image
-                src={presentingFullImage}
-                alt="Connor Pink presenting research."
-                widths={[480, 720, 960]}
-                sizes="(max-width: 1024px) 100vw, 28vw"
-                class="interactive-media h-52 w-full object-cover object-[center_28%] sm:h-60"
-              />
-            </div>
-            <div class="meta-card">
-              <div class="measure-label">Recent Work</div>
-              <div class="mt-2 text-sm text-[var(--color-text)]">
-                Research presentations, experiment summaries, and
-                product-oriented technical work.
-              </div>
-              <div class="mt-4 measure-label">Availability</div>
-              <div class="mt-2 text-sm text-[var(--color-text)]">
-                Selected software, research, and interface work
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="shell pt-24">
-    <div class="grid gap-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
-      <div class="panel craft-card px-6 py-8 sm:px-8">
-        <div class="section-kicker">Current Research</div>
-        <h2 class="section-title mt-4">
-          Medical imaging, evaluation systems, and experiments that can be
-          communicated clearly.
-        </h2>
-        <p class="mt-5 max-w-2xl">
-          Recent work has focused on segmentation, generative modeling, and the
-          tooling needed to compare methods rigorously without losing sight of
-          usability or communication.
+        <p class="mt-5">
+          Before that I did two co-op terms building internal software, at
+          Employment and Social Development Canada and at Peterborough Regional
+          Health Centre.
         </p>
-        <div class="mt-8 grid gap-4 sm:grid-cols-2">
-          <div class="meta-card">
-            <div class="measure-label">Research Areas</div>
-            <div class="mt-2 text-sm text-[var(--color-text)]">
-              Medical imaging, computer vision, explainability, generative
-              models
-            </div>
-          </div>
-          <div class="meta-card">
-            <div class="measure-label">Libraries</div>
-            <div class="mt-2 text-sm text-[var(--color-text)]">
-              Pytorch, MONAI, OpenCV, scikit-learn, Hugging Face Transformers
-            </div>
-          </div>
-        </div>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href="/research" class="button-primary">Browse Research</a>
-          <a href="/resume" class="button-secondary">Resume</a>
-        </div>
+        <p class="meta mt-7 flex flex-wrap gap-x-4 gap-y-1">
+          <span>{siteConfig.location}</span>
+          <a class="link" href={`mailto:${siteConfig.email}`}>email</a>
+          <a class="link" href="https://github.com/connorpink" target="_blank" rel="noreferrer">github</a>
+          <a class="link" href="https://www.linkedin.com/in/connor-pink-65b029193/" target="_blank" rel="noreferrer">linkedin</a>
+          <a class="link" href="/resume">résumé</a>
+        </p>
       </div>
-
-      <div class="image-frame">
+      <figure class="fig hidden md:block">
         <Image
-          src={cxrSamplesGrid}
-          alt="Chest X-ray segmentation figure."
-          widths={[640, 960, 1280]}
-          sizes="(max-width: 1024px) 100vw, 42vw"
-          class="h-full min-h-[22rem] w-full bg-white p-6 object-contain"
+          src={portraitImage}
+          alt="Portrait of Connor Pink."
+          widths={[240, 480]}
+          sizes="11rem"
+          class="aspect-[3/4] object-cover"
         />
+      </figure>
+    </div>
+  </section>
+
+  <section class="shell">
+    <div class="section margin-row">
+      <div class="margin-label">Now</div>
+      <div>
+        <h2 class="section-heading">Do synthetic X-rays help, or is it just more data?</h2>
+        <p class="mt-4 max-w-[38rem]">
+          My thesis looks at training a TB classifier on mixes of real and
+          generated chest X-rays (from a WGAN-GP and a latent diffusion model),
+          to separate two effects: new variety in the data versus simply having
+          more images. Part of it became a short paper at Canadian AI 2026. The
+          diffusion images look better, but neither generator beat just
+          duplicating real images to the same count.
+          <a class="link" href="https://proceedings.mlr.press/v318/pink26a.html" target="_blank" rel="noreferrer">Read the paper</a>
+          or <a class="link" href="/research/generative-ai-medical-imaging">the project notes</a>.
+        </p>
+        <div class="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end">
+          <figure class="fig">
+            <Image
+              src={samplesGrid}
+              alt="Grid of real and synthetic chest X-rays, by source and class."
+              widths={[640, 960, 1400]}
+              sizes="(max-width: 1024px) 100vw, 34rem"
+              class="p-3"
+            />
+            <figcaption>
+              <b>Fig. 1.</b> Real chest X-rays next to WGAN and diffusion samples,
+              for TB and normal cases.
+            </figcaption>
+          </figure>
+          <figure class="fig">
+            <Image
+              src={presentingImage}
+              alt="Connor Pink presenting research slides in a lecture hall."
+              widths={[480, 800]}
+              sizes="(max-width: 1024px) 100vw, 20rem"
+              class="aspect-[4/3] object-cover object-[center_30%]"
+            />
+            <figcaption><b>Fig. 2.</b> Presenting the pipeline at my M.Sc. seminar.</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="shell pt-24">
-    <div class="section-surface section-surface--grid">
-      <SectionIntro
-        kicker="Selected Projects"
-        title="Some of my favourite projects, experiments, and technical work that I've done."
-        text="Deployed, in-progress, and open-source work across research and software development. Click on each for more information."
-        href="/projects"
-        linkLabel="All Projects"
-      />
-      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+  <section class="shell">
+    <div class="section margin-row">
+      <div class="margin-label">Research</div>
+      <div>
         {
-          projects.map((project, index) => (
-            <ProjectCard
-              href={`/projects/${project.slug}`}
-              title={project.data.title}
-              summary={project.data.summary}
-              year={project.data.year}
-              role={project.data.role}
-              status={project.data.status}
-              stack={project.data.stack}
-              cardImage={project.data.cardImage}
-              links={project.data.links}
-              variant={index === 0 ? "feature" : "standard"}
-              reverse={index === 0}
-            />
+          research.map((entry) => (
+            <article class="entry first:pt-0">
+              <a href={`/research/${entry.slug}`} class="no-underline">
+                <h3 class="entry-title">{entry.data.title}</h3>
+              </a>
+              <p class="mt-1.5 max-w-[38rem]">{entry.data.summary}</p>
+              <p class="meta mt-2">
+                {entry.data.year} · {entry.data.publication}
+              </p>
+            </article>
           ))
         }
+        <a class="link meta" href="/research">All research →</a>
       </div>
     </div>
   </section>
 
-  <section class="shell pt-24">
-    <div class="section-surface">
-      <SectionIntro
-        kicker="Research Archive"
-        title="Here are some of my research projects, experiments, and writeups."
-        text="Research from my time at University of Guelph. Click on each for more information. "
-        href="/research"
-        linkLabel="All Research"
-      />
-      <div class="mt-8 space-y-6">
-        {
-          research.map((entry, index) => (
-            <ResearchCard
-              href={`/research/${entry.slug}`}
-              title={entry.data.title}
-              summary={entry.data.summary}
-              year={entry.data.year}
-              domain={entry.data.domain}
-              publication={entry.data.publication}
-              tags={entry.data.tags}
-              cardImage={entry.data.cardImage}
-              links={entry.data.links}
-              reverse={index % 2 === 1}
-            />
-          ))
-        }
+  <section class="shell">
+    <div class="section margin-row">
+      <div class="margin-label">Projects</div>
+      <div>
+        <div class="grid gap-x-8 gap-y-10 sm:grid-cols-2">
+          {
+            projects.map((project) => (
+              <a href={`/projects/${project.slug}`} class="group block no-underline">
+                {project.data.cardImage && (
+                  <figure class="fig">
+                    <Image
+                      src={project.data.cardImage}
+                      alt=""
+                      widths={[480, 800]}
+                      sizes="(max-width: 640px) 100vw, 22rem"
+                      class="aspect-[16/10] object-cover object-top transition-opacity group-hover:opacity-85"
+                    />
+                  </figure>
+                )}
+                <h3 class="entry-title mt-3 group-hover:text-[var(--color-accent)]">
+                  {project.data.title}
+                </h3>
+                <p class="mt-1 text-[0.95rem]">{project.data.summary}</p>
+                <p class="meta mt-2">
+                  {project.data.year} · {project.data.stack.slice(0, 3).join(", ")}
+                </p>
+              </a>
+            ))
+          }
+        </div>
+        <a class="link meta mt-8 inline-block" href="/projects">All projects →</a>
       </div>
     </div>
   </section>
-
 </MainLayout>
